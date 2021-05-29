@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {api} from "../utils/Api"
 import Card from "./Card"
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, handleCardClick}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
   const [userName, setUserName] = useState('')
   const [userAvatar, setUserAvatar] = useState('')
   const [userDescription, setUserDescription] = useState('')
@@ -44,7 +44,8 @@ return (
           link={card.link}
           name={card.name}
           likes={card.likes}
-          onCardClick={handleCardClick} 
+          onCardClick={onCardClick}
+          key={card.id} 
         />
       ))}
     </section>

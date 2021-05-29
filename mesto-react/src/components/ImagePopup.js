@@ -1,4 +1,4 @@
-function ImagePopup(card, onClose) {
+function ImagePopup({card, onClose}) {
   return (
     <section className={`${card.isOpen ? 'image popup popup_type_image popup_opened' : 'image popup popup_type_image '}`}>
     <div className="image__container image__container_type_image">
