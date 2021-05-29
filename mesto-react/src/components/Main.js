@@ -38,14 +38,14 @@ return (
       <button type="button" className="profile__add-card" onClick={onAddPlace}></button>
     </section>
     <section className="elements">
-      {cards.map((card) => (
+      {cards.map((card, i) => (
         <Card
           card={card}
           link={card.link}
           name={card.name}
           likes={card.likes}
           onCardClick={onCardClick}
-          key={card.id} 
+          key={i} 
         />
       ))}
     </section>
