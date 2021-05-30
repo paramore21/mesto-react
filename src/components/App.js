@@ -27,7 +27,7 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
-    setSelectedCard({})
+    setSelectedCard({isOpen: false})
   }
 
   function handleCardClick(card){

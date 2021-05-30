@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {api} from "../utils/Api"
+import {api} from "../utils/api"
 import Card from "./Card"
 
 function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
@@ -12,18 +12,16 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick}) {
     api.getInitialCards().then(res => {
       setCards(res)
     })
+    .catch(err => console.log(err))
   }, [])
 
   useEffect(() => {
-    api.getUserInformation().then(res => {setUserName(res.name)})
-  }, [])
-
-  useEffect(() => {
-    api.getUserInformation().then(res => {setUserDescription(res.about)})
-  }, [])
-
-  useEffect(() => {
-    api.getUserInformation().then(res => {setUserAvatar(res.avatar)})
+    api.getUserInformation().then(res => {
+      setUserName(res.name)
+      setUserDescription(res.about)
+      setUserAvatar(res.avatar)
+    })
+    .catch(err => console.log(err))
   }, [])
   
 return (
@@ -38,23 +36,16 @@ return (
       <button type="button" className="profile__add-card" onClick={onAddPlace}></button>
     </section>
     <section className="elements">
-      {cards.map((card, i) => (
+      {cards.map((card, _id) => (
         <Card
           card={card}
           link={card.link}
           name={card.name}
           likes={card.likes}
           onCardClick={onCardClick}
-          key={i} 
+          key={card._id} 
         />
       ))}
-    </section>
-    <section className="delete popup popup_type_delete">
-      <div className="delete__container">
-        <h3 className="delete__title">Вы уверены?</h3>
-        <button type="button" className="popup__close-form"></button>
-        <button type="button" className="delete__submit popup__submit">Да</button>
-      </div>
     </section>
   </main>
 )}
