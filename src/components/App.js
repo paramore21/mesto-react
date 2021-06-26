@@ -6,7 +6,7 @@ import ImagePopup from "./ImagePopup"
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
-import Api from "../utils/api"
+import api from "../utils/api"
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
   const [cards, setCards] = useState([])
 
   useEffect(() => {
-    Api.getInitialCards().then(res => {
+    api.getInitialCards().then(res => {
       setCards(res)
     })
     .catch(err => console.log(err))
@@ -48,7 +48,7 @@ function App() {
   }
 
   const handleCardDelete = (id) => {
-    return Api.deleteCard(id)
+    return api.deleteCard(id)
     .then(() => {
       const newCards = cards.filter(card => card._id !== id)
       setCards(newCards)
@@ -58,12 +58,12 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
     if(!isLiked){
-      Api.setLike(card._id).then((newCard) => {
+      api.setLike(card._id).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
     }
     else {
-      Api.removeLike(card._id).then((newCard) => {
+      api.removeLike(card._id).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
     }
@@ -72,28 +72,28 @@ function App() {
     const userInfo = {
       name, about
     }
-    return Api.updateUserInformation(userInfo.name, userInfo.about).then((res) => {
+    return api.updateUserInformation(userInfo.name, userInfo.about).then((res) => {
       setCurrentUser(res)
       closeAllPopups()
     })
   }
 
   function handleUpdateAvatar(avatar) {
-    return Api.updateUserAvatar(avatar).then((res) => {
+    return api.updateUserAvatar(avatar).then((res) => {
       setCurrentUser(res)
       closeAllPopups()
     })
   }
 
   function handleAddPlaceSubmit({place, link}) {
-    return Api.addNewCardToServer(place, link).then((res) => {
+    return api.addNewCardToServer(place, link).then((res) => {
       setCards([res, ...cards]);
       closeAllPopups()
     }) 
   }
 
   useEffect(() => {
-    Api.getUserInformation().then(res => {
+    api.getUserInformation().then(res => {
       setCurrentUser(res)
     })
     .catch(err => console.log(err))
