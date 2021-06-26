@@ -32,7 +32,7 @@ function AddPlacePopup({isOpen, onClose, onCardCreate}) {
   return (
     <PopupWithForm
       isOpen={isOpen}
-      formName='edit'
+      formName='add_place'
       title='Новое место'
       buttonName='Сохранить'
       onClose={onClose}

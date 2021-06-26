@@ -4,7 +4,7 @@ import PopupWithForm from "./PopupWithForm"
 function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   const currentUser = React.createContext(CurrentUserContext)
   const [url, setUrl] = useState("")
-  const urlRef = React.useRef();
+  const urlRef = React.useRef(null);
   
   function handleUrlChange(e) {
     setUrl(e.target.value)
@@ -24,12 +24,12 @@ function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
   return (
     <PopupWithForm       
       isOpen={isOpen}
-      formName='edit'
+      formName='update_avatar'
       title='Обновить аватар'
       buttonName='Сохранить'
       onClose={onClose}
       onSubmit={handleSubmit}> 
-      <input type="url" ref={urlRef} value={"" || url} onChange={handleUrlChange} className="avatar__edit avatar__edit_type_url popup__input" name="avatar" placeholder="Ссылка на картинку" required />
+      <input type="url" ref={urlRef} defaultValue="" onChange={handleUrlChange} className="avatar__edit avatar__edit_type_url popup__input" name="avatar" placeholder="Ссылка на картинку" required />
       <span className="popup__error" id="avatar__avatar__error"></span>
     </PopupWithForm>
   )
