@@ -1,9 +1,7 @@
 import React, { useState } from "react"
-import { CurrentUserContext } from "../contexts/CurrentUserContext"
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({isOpen, onClose, onCardCreate}) {
-  const currentUser = React.useContext(CurrentUserContext);
 
   const [place, setPlace] = useState("")
   const [link, setLink] = useState("")
@@ -15,11 +13,6 @@ function AddPlacePopup({isOpen, onClose, onCardCreate}) {
   function handleLinkChange(e) {
     setLink(e.target.value)
   }
-
-  React.useEffect(() => {
-    setPlace(currentUser.place)
-    setLink(currentUser.link)
-  }, [currentUser])
 
   function handleAddPlaceSubmit(e) {
     e.preventDefault();
